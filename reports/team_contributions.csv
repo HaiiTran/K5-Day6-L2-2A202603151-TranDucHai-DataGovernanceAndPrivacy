@@ -1,6 +1,6 @@
 member,git_author_name,git_email,role,modules_files,commit_shas,evidence_note,presenter
 TranDucHai,HaiiTran,dstran24@gmail.com,Lead / Integrator,src/main.py; configs/,,,
-Member 2,,,Data & fixtures,fixtures/; tools/,,,
-Member 3,,,Core algorithm,src/pipeline.py,,,
-Member 4,,,QA / metric,tests/; reports/metrics_*.json,,,
-Member 5,,,Human review + report,reports/group_report.md; demo/,,,
+TranDucHai,HaiiTran,dstran24@gmail.com,Data & fixtures,fixtures/; tools/,,,
+TranDucHai,HaiiTran,dstran24@gmail.com,Core algorithm,src/pipeline.py,,,
+TranDucHai,HaiiTran,dstran24@gmail.com,QA / metric,tests/; reports/metrics_*.json,,,
+TranDucHai,HaiiTran,dstran24@gmail.com,Human review + report,reports/group_report.md; demo/,,
