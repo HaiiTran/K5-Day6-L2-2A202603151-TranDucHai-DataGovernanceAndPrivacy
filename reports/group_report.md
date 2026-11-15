@@ -8,62 +8,62 @@
 
 | Mục | Giá trị |
 |---|---|
-| Group ID | G__ |
-| Challenge | T__ · ______________________ |
-| Thành viên (5–6) + vai trò | 1. ____ (Lead/Integrator) · 2. ____ (Data & fixtures) · 3. ____ (Core algorithm) · 4. ____ (QA/metric) · 5. ____ (Review + report) · 6. ____ |
-| Git URL | ____ |
-| Tag `demo-180m` (commit) | ____ |
-| Tag `final-24h` (commit) | ____ |
-| Deadline (giờ VN) | ____ |
+| Group ID | G01 |
+| Challenge | T02 · Raw QC Triage |
+| Thành viên (5–6) + vai trò | Trần Đức Hải (`haiitran`) — cá nhân: Data & fixtures, Core algorithm, QA/metric, Review + report|
+| Git URL | https://github.com/HaiiTran/K5-Day6-L2-2A202603151-TranDucHai-DataGovernanceAndPrivacy |
+| Tag `demo-180m` (commit) | Chưa tạo |
+| Tag `final-24h` (commit) | Chưa tạo |
+| Deadline (giờ VN) | - |
 
 ## 01 · Problem statement
 
-- Ai bị ảnh hưởng / ai chịu hậu quả khi hệ thống sai? ____
-- Điểm nghẽn cụ thể: ____
-- Đầu vào → đầu ra: ____
-- Tiêu chí GO / HOLD / REWORK (chốt trước khi chạy eval): ____
-- Giả định của nhóm (cần DPO/legal/domain owner xác nhận): ____
+- Ai bị ảnh hưởng / ai chịu hậu quả khi hệ thống sai? Người vận hành QC; ảnh lỗi lọt qua có thể làm giảm chất lượng dữ liệu dùng sau đó.
+- Điểm nghẽn cụ thể: Ưu tiên 20 ảnh cần review trong pool cố định 96 ảnh.
+- Đầu vào → đầu ra: `fixtures/t02_raw_qc/images.csv` và ảnh → score/ranked review top-20 → KEEP/RECAPTURE và decision.
+- Tiêu chí GO / HOLD / REWORK (chốt trước khi chạy eval): HOLD nếu còn pending/escalate; REWORK nếu xác nhận ảnh severity 2 cần chụp lại; GO nếu review xong và không còn ảnh cần chụp lại.
+- Giả định của nhóm (cần DPO/legal/domain owner xác nhận): score chỉ ưu tiên review, quyết định cuối do người review; fixture synthetic không đại diện đầy đủ ảnh thật.
 
 ## 02 · Data & provenance
 
 | Split | N | Nguồn / link | License | Synthetic? |
 |---|---|---|---|---|
-| dev | | | | |
-| eval / heldout | | | | |
+| dev | 56 | `fixtures/t02_raw_qc/` | CC0-1.0 | Synthetic |
+| eval / heldout | 40 | `fixtures/t02_raw_qc/` | CC0-1.0 | Synthetic |
 
-- Schema & class mapping: ____
-- Seed: 42 · Cách chia split (theo scene/group/segment?): ____
-- `manifest.csv` verified (sha256): có / không — lệnh: `python -m tools.verify_manifests`
-- Dữ liệu thật dùng (nếu có) và cách xây GT cho nó: ____
+- Schema & class mapping: `image_id, path, camera_id, light, split`; defect type `none, blur, glare, dark, compression`; severity 0–2.
+- Seed: 42 · Cách chia split (theo scene/group/segment?): theo scene gốc.
+- `manifest.csv` verified (sha256): Có ; lệnh: `python -m tools.verify_manifests`
+- Dữ liệu thật dùng (nếu có) và cách xây GT cho nó: Không dùng; dev labels là tự review, không phải GT coach.
 
 ## 03 · Research & design
 
-- 2–3 references (URL + ngày xem) và **vì sao** chọn kỹ thuật: ____
-- Sơ đồ data flow (input → process → rank/QC → review → decision → report): ____
-- Thành phần offline (model/weights + checksum + license nếu có): ____
-- Trade-offs đã cân nhắc: ____
+- 2–3 references (URL + ngày xem) và **vì sao** chọn kỹ thuật: Chưa bổ sung nghiên cứu ngoài.
+- Sơ đồ data flow (input → process → rank/QC → review → decision → report): manifest/images → feature ảnh → score/rank top-20 → review/override/audit → GO/HOLD/REWORK → report.
+- Thành phần offline (model/weights + checksum + license nếu có): Không dùng model/weights; feature ảnh chạy CPU, offline.
+- Trade-offs đã cân nhắc: heuristic giải thích được và chạy offline; có thể nhầm ảnh tối tự nhiên hoặc glare cục bộ.
 
 ## 04 · Baseline vs PoC
 
-- Baseline (mô tả, version/config, commit): ____
-- PoC (mô tả, version/config, commit): ____
-- Cùng budget / cùng heldout / cùng seed: xác nhận ____
+- Baseline (mô tả, version/config, commit):
+- PoC (mô tả, version/config, commit): `src/pipeline.py`; heuristic blur/brightness/glare, B=20, seed 42, action cutoff 0.5;
+- Cùng budget / cùng heldout / cùng seed: B=20, seed 42; chưa so sánh heldout.
 
 **Bảng 1 · Baseline vs PoC & hard slices** — dán output của
 `python -m src.compare reports/metrics_baseline.json reports/metrics_poc.json`:
 
 | Metric (unit) | Baseline | PoC | Δ & chú thích |
 |---|---|---|---|
-| Primary: ______ | ____ | ____ | ____; higher/lower? |
-| Hard-slice: ______ | ____ | ____ | ____; N=__ |
-| Review@B / miss / FP | ____ | ____ | ____; B=__ |
-| Runtime / 100 items | ____ | ____ | ____; CPU=__ |
+| Primary: Defect Recall@20| 0.6364 | 0.8182 | +0.1818; higher; không official |
+| Hard-slice: | 0.1000 | 0.2000 | +0.1000; lower ; N=16 |
+| Review@B / miss / FP | P@20 0.7000; TP=14, FN=8, FP=6 | P@20 0.9000; TP=18, FN=4, FP=2 | B=20 |
+| Runtime / 100 items | | | |
 
 ## 05 · Evaluation protocol
 
-- Công thức primary metric, đơn vị đánh giá, TP/FP/FN, denominator: ____ (xem `reports/metric_contract.md`)
-- Threshold / budget B / K và lúc chốt: ____
-- Độ bất định (CI/bootstrap/variance) khi N nhỏ: ____
+- Công thức primary metric, đơn vị đánh giá, TP/FP/FN, denominator: Recall@20=TP/số defect; Precision@20=TP/20; đơn vị ảnh.
+- Threshold / budget B / K và lúc chốt:
+- Độ bất định (CI/bootstrap/variance) khi N nhỏ: 
 - Lệnh evaluate chính xác: `python -m src.evaluate --track t__ --pred ... --out ...`
 
 ## 06 · Result slices
@@ -79,10 +79,10 @@
 
 ## 07 · Human & decision
 
-- Review queue (file, B, cách ưu tiên): ____
-- Cách override + audit log (`out/audit_log.jsonl`): ____
-- Decision policy + `reason_code` + owner: ____
-- Khi nào HOLD/REWORK thay vì tự động release: ____
+- Review queue (file, B, cách ưu tiên): `reports/review_queue.csv`, B=20; ưu tiên score giảm dần.
+- Cách override + audit log (`out/audit_log.jsonl`): reviewer dùng approve/reject/edit; edit ghi KEEP/RECAPTURE.
+- Decision policy + `reason_code` + owner: HOLD khi pending/escalate; REWORK khi có severity-2 recapture; run hiện tại REWORK, `SEVERITY_2_RECAPTURE_REQUIRED`, owner `Tran Duc Hai`.
+- Khi nào HOLD/REWORK thay vì tự động release: HOLD nếu còn review/escalate; REWORK nếu reviewer xác nhận ảnh không dùng được cần chụp lại; không tự release khi chưa review xong.
 
 ## 08 · Reproduce & tests
 
@@ -93,23 +93,21 @@ python -m src.evaluate --track t__ --pred out/<file> --out reports/metrics_poc.j
 pytest -q
 ```
 
-- Output của `pytest -q`: ____
-- Máy / CPU / OS / Python: ____ · git sha: ____
-
+- Output của `pytest -q`: PASS, exit 0
+- Máy / CPU / OS / Python: Windows 11 · Intel64 Family 6 Model 142 Stepping 12 · Python 3.14.6 · git sha ghi git sha: ____
 ## 09 · Limitations & ethics
 
-- Rủi ro pháp lý / PII / license: ____
-- Điều chưa biết; false alarms; nếu scale 10× thì sao: ____
-- Không tuyên bố "đạt GDPR / luật Việt Nam" từ checklist tự động; giả định cần DPO/legal xác nhận: ____
-- Kế hoạch cải tiến: ____
-
+- Rủi ro pháp lý / PII / license: chỉ dùng fixture synthetic CC0-1.0, không có ảnh người thật.
+- Điều chưa biết; false alarms; nếu scale 10× thì sao: chưa xác thực trên ảnh; false alarm theo dev slices được ghi ở trên; chưa benchmark scale 10×.
+- Không tuyên bố "đạt GDPR / luật Việt Nam" từ checklist tự động; giả định cần DPO/legal xác nhận: domain owner xác nhận ngưỡng ảnh không dùng được.
+- Kế hoạch cải tiến: 
 ## 10 · Team contribution
 
 **Bảng 2 · Individual contribution evidence** (đối chiếu với `git shortlog -sne --all` và `reports/team_contributions.csv`)
 
 | Học viên | Git author/email | Module / vai trò | Commit SHA / diff chứng minh | Trình bày? |
 |---|---|---|---|---|
-| Member 1 | | Integration / CLI | | |
+| Trần Đức Hải| | Pipeline T02, review, report | | |
 | Member 2 | | Data + GT | | |
 | Member 3 | | Core algorithm | | |
 | Member 4 | | Metric + tests | | |

@@ -1,0 +1,10 @@
+ts,scope,status,canonical,reason_code,reason,owner,evidence
+2026-11-14T17:12:58+00:00,t02,HOLD,HOLD,HUMAN_REVIEW_PENDING,Review 20 queued images; 0 escalated.,Tran Duc Hai - reviewer,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-14T17:21:55+00:00,t02,HOLD,HOLD,HUMAN_REVIEW_PENDING,Review 20 queued images; 0 escalated.,Tran Duc Hai - reviewer,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-14T17:22:47+00:00,t02,HOLD,HOLD,HUMAN_REVIEW_PENDING,Review 20 queued images; 0 escalated.,Tran Duc Hai - reviewer,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-14T17:23:24+00:00,t02,REWORK,REWORK,SEVERITY_2_RECAPTURE_REQUIRED,Review confirmed 11 unusable image(s) (severity 2) for recapture.,Tran Duc Hai - reviewer,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-14T17:24:52+00:00,t02,REWORK,REWORK,SEVERITY_2_RECAPTURE_REQUIRED,Review confirmed 11 unusable image(s) (severity 2) for recapture.,Tran Duc Hai - reviewer,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-14T17:44:28+00:00,t02,REWORK,REWORK,SEVERITY_2_RECAPTURE_REQUIRED,Review confirmed 11 unusable image(s) (severity 2) for recapture.,Tran Duc Hai,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-15T01:57:55+00:00,t02,REWORK,REWORK,SEVERITY_2_RECAPTURE_REQUIRED,Review confirmed 10 unusable image(s) (severity 2) for recapture.,Tran Duc Hai,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-15T01:58:13+00:00,t02,REWORK,REWORK,SEVERITY_2_RECAPTURE_REQUIRED,Review confirmed 10 unusable image(s) (severity 2) for recapture.,Tran Duc Hai,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv
+2026-11-15T01:58:50+00:00,t02,REWORK,REWORK,SEVERITY_2_RECAPTURE_REQUIRED,Review confirmed 10 unusable image(s) (severity 2) for recapture.,Tran Duc Hai,out\poc_threshold_0_5\ranked_review.csv;out\poc_threshold_0_5\review_queue.csv

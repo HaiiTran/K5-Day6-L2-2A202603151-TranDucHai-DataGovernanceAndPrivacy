@@ -1,0 +1,21 @@
+rank,item_id,score,reason,suggested_action,slice,evidence_path,reviewer,reviewer_decision,override_value,review_note,reviewed_at
+1,img_15_3,8.4737,toi mat chi tiet,RECAPTURE,dusk,images/img_15_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+2,img_12_3,8.4707,toi mat chi tiet,KEEP,dusk,images/img_12_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+3,img_17_3,8.47,toi mat chi tiet,RECAPTURE,day,images/img_17_3.jpg,haiitran,edit,RECAPTURE,Chinh theo y kien reviewer.,2026-11-14T22:39:34+07:00
+4,img_23_3,8.4699,toi mat chi tiet,RECAPTURE,day,images/img_23_3.jpg,haiitran,reject,KEEP,Khong dong y; giu anh.,2026-11-14T22:39:34+07:00
+5,img_08_3,8.465,toi mat chi tiet,KEEP,dusk,images/img_08_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+6,img_07_2,8.4565,toi mat chi tiet,KEEP,day,images/img_07_2.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+7,img_02_3,8.4513,toi mat chi tiet,KEEP,day,images/img_02_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+8,img_10_3,8.4485,toi mat chi tiet,KEEP,day,images/img_10_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+9,img_20_2,8.4447,toi mat chi tiet,KEEP,day,images/img_20_2.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+10,img_17_2,8.4378,loa,RECAPTURE,day,images/img_17_2.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+11,img_01_2,3.2812,toi mat chi tiet,KEEP,night,images/img_01_2.jpg,haiitran,reject,KEEP,Khong dong y; giu anh.,2026-11-14T22:39:34+07:00
+12,img_04_3,2.0593,mo,RECAPTURE,dusk,images/img_04_3.jpg,haiitran,edit,RECAPTURE,Chinh theo y kien reviewer.,2026-11-14T22:39:34+07:00
+13,img_22_3,1.6543,loa,RECAPTURE,dusk,images/img_22_3.jpg,haiitran,edit,KEEP,Chinh: giu anh.,2026-11-15T08:58:41+07:00
+14,img_15_2,1.5766,mo,RECAPTURE,dusk,images/img_15_2.jpg,haiitran,edit,RECAPTURE,Chinh theo y kien reviewer.,2026-11-14T22:39:34+07:00
+15,img_07_3,1.5395,mo,RECAPTURE,day,images/img_07_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+16,img_11_3,1.5392,mo,RECAPTURE,day,images/img_11_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+17,img_19_3,1.5391,mo,RECAPTURE,day,images/img_19_3.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+18,img_16_2,1.5385,mo,RECAPTURE,day,images/img_16_2.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+19,img_14_2,1.5376,mo,RECAPTURE,day,images/img_14_2.jpg,haiitran,approve,,Dong y de xuat.,2026-11-14T22:39:34+07:00
+20,img_12_0,1.2071,mo,RECAPTURE,dusk,images/img_12_0.jpg,haiitran,reject,KEEP,Khong dong y; giu anh.,2026-11-14T22:39:34+07:00
